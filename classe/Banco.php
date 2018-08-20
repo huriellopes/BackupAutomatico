@@ -1,7 +1,12 @@
 <?php
-
+// Inclui o arquivo de configuração na classe
 require_once __DIR__ . "/../config.php";
 
+/**
+ * Sistema de Backup Automático para ser utilizado como rotina de backup!
+ * 
+ * @author Huriel Lopes
+ */
 class Banco
 {
 
@@ -27,6 +32,7 @@ class Banco
 	private function getDestino()	{return self::$destino;}
 	private function getOpcao()		{return self::$opcao;}
 
+	// Função responsável por executar o backup
 	public function Backup()
 	{
 		$opcao = $this->getOpcao();
