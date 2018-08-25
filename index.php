@@ -1,16 +1,18 @@
 <?php
 
-// Inclui o arquivo da classe!
-require_once __DIR__ . "/classe/Banco.php";
+// Linka
+require_once __DIR__ . "/Classe/Banco.php";
 
 // Instância um objeto da classe
-$backup = new Banco();
+$backup = new Classe\Banco();
 
-echo "===================================\n";
-echo "Fazendo o Backup do Banco de dados!\n";
-echo "===================================\n";
+echo "************************************\n";
+echo "*** Sistema de Backup Automático ***\n";
+echo "*** Author.....: Huriel Lopes ******\n";
+echo "************************************\n";
 
 // Chama o método para executar
+echo "Aguarde um momento....\n";
 $backup->backup();
 
 echo "==============================\n";
