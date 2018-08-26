@@ -51,7 +51,6 @@ class Banco
 	private function MySQL()
 	{
 		$opcao = $this->getOpcao();
-		$banco = $this->getBanco();
 		
 		if ($opcao == 'backup') {
 			if (file_exists($this->getDB().".sql")) {
@@ -75,7 +74,6 @@ class Banco
 	private function PostgreSQL()
 	{
 		$opcao = $this->getOpcao();
-		$banco = $this->getBanco();
 		
 		if ($opcao == 'backup') {
 			if (file_exists($this->getDB().".sql")) {
