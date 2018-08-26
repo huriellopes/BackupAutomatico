@@ -63,12 +63,12 @@ class Banco
 			/** Verifica se o arquivo SQL existe, Caso não exista, faz o backup,
 			 * Caso o arquivo exista, entra no else, exclui o arquivo antigo e faz um novo backup!
 			*/
-			if (file_exists($this->getDB().".sql")) {
+			if (!file_exists($this->getDestino().$this->getDB().".sql")) {
 				$this->backup = system($this->getBin().$this->getBanco()."dump.exe -h".$this->getHost()." -u".$this->getUser()." -p".$this->getPass()." -P".$this->getPort()." ".$this->getDB()." > ".$this->getDestino().$this->getDB().".sql");
 			} else {
 				echo "Excluindo o backup antigo - MySQL!\n";
 				unlink($this->getDestino().$this->getDB().".sql");
-				echo "********************************\n";
+				echo "****************************************\n";
 				echo "Fazendo um novo Backup - MySQL!\n";
 				$this->backup = system($this->getBin().$this->getBanco()."dump.exe -h".$this->getHost()." -u".$this->getUser()." -p".$this->getPass()." -P".$this->getPort()." ".$this->getDB()." > ".$this->getDestino().$this->getDB().".sql");
 			}
@@ -93,12 +93,12 @@ class Banco
 			/** Verifica se o arquivo SQL existe, Caso não exista, faz o backup,
 			 * Caso o arquivo exista, entra no else, exclui o arquivo antigo e faz um novo backup!
 			*/
-			if (file_exists($this->getDB().".sql")) {
+			if (!file_exists($this->getDestino().$this->getDB().".sql")) {
 				$this->backup = system($this->getBin().$this->getBanco()."_dump.exe --host ".$this->getHost()." --port ".$this->getPort()." --username ".$this->getUser()." --file ".$this->getDestino().$this->getDB().".sql ".$this->getDB());
 			} else{
 				echo "Excluindo o backup antigo - PostgreSQL!\n";
 				unlink($this->getDestino().$this->getDB().".sql");
-				echo "*******************************\n";
+				echo "****************************************\n";
 				echo "Fazendo um novo Backup - PostgreSQL!\n";
 				$this->backup = system($this->getBin().$this->getBanco()."_dump.exe --host ".$this->getHost()." --port ".$this->getPort()." --username ".$this->getUser()." --file ".$this->getDestino().$this->getDB().".sql ".$this->getDB());
 			}
