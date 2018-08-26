@@ -19,10 +19,10 @@
 define("HOST", 'localhost');
 define("PORT", '');
 define("DB", '');
-define("USER", '');
+define("USER", 'root');
 define("PASS", '');
 define("CHARSET", 'utf-8');
-define("Bin", 'C:/Mysql5/bin/');
+define("Bin", '');
 define("Destino", 'C:/backup/');
 define("Banco", 'mysql');
 define("Opcao", 'backup');
