@@ -17,12 +17,12 @@
  * @author Huriel Lopes
  */
 define("HOST", 'localhost');
-define("PORT", '');
-define("DB", '');
+define("PORT", '3307');
+define("DB", 'biblioteca');
 define("USER", 'root');
-define("PASS", '');
+define("PASS", '299610');
 define("CHARSET", 'utf-8');
-define("Bin", '');
+define("Bin", 'C:/Mysql5/bin/');
 define("Destino", 'C:/backup/');
 define("Banco", 'mysql');
 define("Opcao", 'backup');

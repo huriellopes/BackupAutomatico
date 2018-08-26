@@ -1,7 +1,9 @@
 <?php
 
+// Namespace da classe
 namespace Classe;
 
+// Inclui o arquivo de configuração na classe!
 require_once __DIR__ . "/../Config/Config.php";
 
 /**
@@ -39,8 +41,10 @@ class Banco
 	// Função responsável por executar o backup
 	public function Backup()
 	{
+		// Variável de Tipo de Banco
 		$banco = $this->getBanco();
 		
+		// Verifica o banco passado na configuração
 		if ($banco == 'mysql') {
 			$this->MySQL();
 		} else if ($banco == 'pg') {
@@ -48,11 +52,17 @@ class Banco
 		}
 	}
 
+	// Classe Responsável por Bakcup no banco MySQL
 	private function MySQL()
 	{
+		// Variável de opção
 		$opcao = $this->getOpcao();
 		
+		// Verifica a opção passada na configuração
 		if ($opcao == 'backup') {
+			/** Verifica se o arquivo SQL existe, Caso não exista, faz o backup,
+			 * Caso o arquivo exista, entra no else, exclui o arquivo antigo e faz um novo backup!
+			*/
 			if (file_exists($this->getDB().".sql")) {
 				$this->backup = system($this->getBin().$this->getBanco()."dump.exe -h".$this->getHost()." -u".$this->getUser()." -p".$this->getPass()." -P".$this->getPort()." ".$this->getDB()." > ".$this->getDestino().$this->getDB().".sql");
 			} else {
@@ -62,6 +72,7 @@ class Banco
 				echo "Fazendo um novo Backup - MySQL!\n";
 				$this->backup = system($this->getBin().$this->getBanco()."dump.exe -h".$this->getHost()." -u".$this->getUser()." -p".$this->getPass()." -P".$this->getPort()." ".$this->getDB()." > ".$this->getDestino().$this->getDB().".sql");
 			}
+		// Caso seja a opção de restauração de backup, ele entra nessa opção e restaura o backup!
 		} else if ($opcao == 'restore') {
 			$this->backup = system($this->getBin().$this->getBanco().".exe -h".$this->getHost()." -u".$this->getUser()." -p".$this->getPass()." -P".$this->getPort()." ".$this->getDB()." < ".$this->getDestino().$this->getDB().".sql");
 		} else {
@@ -71,11 +82,17 @@ class Banco
 		return $this->backup;
 	}
 
+	// Classe Responsável por Bakcup no banco PostgreSQL
 	private function PostgreSQL()
 	{
+		// Variável de opção
 		$opcao = $this->getOpcao();
 		
+		// Verifica a opção passada na configuração
 		if ($opcao == 'backup') {
+			/** Verifica se o arquivo SQL existe, Caso não exista, faz o backup,
+			 * Caso o arquivo exista, entra no else, exclui o arquivo antigo e faz um novo backup!
+			*/
 			if (file_exists($this->getDB().".sql")) {
 				$this->backup = system($this->getBin().$this->getBanco()."_dump.exe --host ".$this->getHost()." --port ".$this->getPort()." --username ".$this->getUser()." --file ".$this->getDestino().$this->getDB().".sql ".$this->getDB());
 			} else{
@@ -85,6 +102,7 @@ class Banco
 				echo "Fazendo um novo Backup - PostgreSQL!\n";
 				$this->backup = system($this->getBin().$this->getBanco()."_dump.exe --host ".$this->getHost()." --port ".$this->getPort()." --username ".$this->getUser()." --file ".$this->getDestino().$this->getDB().".sql ".$this->getDB());
 			}
+		// Caso seja a opção de restauração de backup, ele entra nessa opção e restaura o backup!
 		} else if ($opcao == 'restore') {
 			$this->backup = system($this->getBin().$this->getBanco()."_restore.exe --host ".$this->getHost()." --port ".$this->getPort()." --username ".$this->getUser()." --dbname ".$this->getDB()." ".$this->getDestino().$this->getDB().".sql");
 		} else {
